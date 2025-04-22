@@ -1,0 +1,103 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  // Relations
+  wallets      Wallet[]
+  orders       Order[]
+  transactions Transaction[]
+}
+
+model Wallet {
+  id               Int            @id @default(autoincrement())
+  userId           Int
+  cryptoCurrencyId Int
+  balance          Decimal        @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  // Relations
+  user             User?           @relation(fields: [userId], references: [id])
+  cryptoCurrency   CryptoCurrency? @relation(fields: [cryptoCurrencyId], references: [id])
+  @@unique([userId, cryptoCurrencyId]) // Prevent duplicate wallets per currency
+}
+
+model Order {
+  id               Int            @id @default(autoincrement())
+  userId           Int
+  cryptoCurrencyId Int
+  status           OrderStatus    @default(PENDING)
+  amount           Decimal
+  price            Decimal
+  type             OrderType
+  createdAt        DateTime       @default(now())
+  // Relations
+  user             User           @relation(fields: [userId], references: [id])
+  cryptoCurrency   CryptoCurrency @relation(fields: [cryptoCurrencyId], references: [id])
+  Transaction      Transaction[]
+}
+
+enum OrderStatus {
+  SUCCESS
+  PENDING
+  FAILED
+}
+
+enum TransactionStatus {
+  SUCCESS
+  PENDING
+  FAILED
+}
+
+enum OrderType {
+  BUY
+  SELL
+}
+
+enum TransactionType {
+  BUY
+  SELL
+  DEPOSIT
+  WITHDRAW
+}
+
+model Transaction {
+  id               Int               @id @default(autoincrement())
+  userId           Int
+  cryptoCurrencyId Int
+  orderId          Int
+  status           TransactionStatus
+  fee              Decimal
+  createdAt        DateTime          @default(now())
+  paymentMethod    String
+  type             TransactionType
+
+  user           User           @relation(fields: [userId], references: [id])
+  cryptoCurrency CryptoCurrency @relation(fields: [cryptoCurrencyId], references: [id])
+  order          Order          @relation(fields: [orderId], references: [id])
+}
+
+model CryptoCurrency {
+  id           Int           @id @default(autoincrement())
+  name         String
+  price        Decimal
+  logo         String?
+  isActive     Boolean       @default(true)
+  // Relations
+  wallets      Wallet[]
+  orders       Order[]
+  transactions Transaction[]
+}
