@@ -7,11 +7,16 @@ USER-Auth
 |/auth/register |post|-|-|-| {email,firstname,lastname,password,confirmPassword}
 |/auth/login|post|-|-|-| {email,password}
 |/auth/current-user|get|y|-|-|-|
-USER-Wallets
-|/wallet|get|y|-|-|-|
+
 USER-CryptoCurrency
 |/currency|get|y|-|-|-|
 |/currency/:id|get|y|id|-|-|
+
+
+USER-Wallets
+|/wallet|get|y|-|-|-|
+|/wallet|patch|y|id|-|-|
+
 
 
 
