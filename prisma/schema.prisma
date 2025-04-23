@@ -32,7 +32,7 @@ model Wallet {
   // Relations
   user             User?           @relation(fields: [userId], references: [id])
   cryptoCurrency   CryptoCurrency? @relation(fields: [cryptoCurrencyId], references: [id])
-  @@unique([userId, cryptoCurrencyId]) // Prevent duplicate wallets per currency
+  @@unique([userId, cryptoCurrencyId]) 
 }
 
 model Order {

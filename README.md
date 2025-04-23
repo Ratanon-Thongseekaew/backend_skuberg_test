@@ -9,8 +9,12 @@ USER-Auth
 |/auth/current-user|get|y|-|-|-|
 USER-Wallets
 |/wallet|get|y|-|-|-|
-USER-Currency
+USER-CryptoCurrency
 |/currency|get|y|-|-|-|
+|/currency/:id|get|y|id|-|-|
+
+
+
 USER-Order
 /order|get|y|id|-|-|
 /order/history|get|y|-|-|-|
