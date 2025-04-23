@@ -6,6 +6,7 @@ const handleErrors = require("./src/middlewares/handleErrors")
 const authRouter = require("./src/routes/auth-route")
 const cryptoRouter = require("./src/routes/crypto-route")
 const walletRouter = require("./src/routes/wallet-route")
+const orderRouter = require("./src/routes/order-route")
 const app = express();
 
 //middlewares
@@ -17,6 +18,7 @@ app.use(express.json()) // read json
 app.use("/api",authRouter)
 app.use("/api",cryptoRouter)
 app.use("/api",walletRouter)
+app.use("/api",orderRouter)
 
 
 //handle error

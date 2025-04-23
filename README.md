@@ -12,17 +12,17 @@ USER-CryptoCurrency
 |/currency|get|y|-|-|-|
 |/currency/:id|get|y|id|-|-|
 
-
 USER-Wallets
 |/wallet|get|y|-|-|-|
 |/wallet|patch|y|id|-|-|
 
 
-
-
 USER-Order
 /order|get|y|id|-|-|
 /order/history|get|y|-|-|-|
+
+
+
 USER-Transaction
 /transaction|post|y|-|-|{currencyId, amount, toUserId}|
 /transaction|get|y|-|-|-|
