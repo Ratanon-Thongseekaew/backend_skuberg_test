@@ -99,7 +99,7 @@ exports.createBuyOrder = async (req, res, next) => {
     const fee = 5555;
     const totalAmount = totalCost + fee;
 
-    if (!userCryptoWallet.balance < totalAmount) {
+    if (userCryptoWallet.balance < totalAmount) {
       return createError(400, "Insufficient balance in wallet");
     }
     //create buy order

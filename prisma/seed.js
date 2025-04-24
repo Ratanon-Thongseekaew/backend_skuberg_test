@@ -55,6 +55,98 @@ const walletData = [
   },
 ];
 
+
+const orderData = [
+  {
+    userId: 1,
+    cryptoCurrencyId: 1,
+    status: 'SUCCESS',
+    amount: '0.05',
+    price: '45000',
+    type: 'BUY',
+  },
+  {
+    userId: 1,
+    cryptoCurrencyId: 1,
+    status: 'SUCCESS',
+    amount: '10',
+    price: '2500',
+    type: 'BUY',
+  },
+  {
+    userId: 1,
+    cryptoCurrencyId: 1,
+    status: 'PENDING',
+    amount: '0.02',
+    price: '46000',
+    type: 'SELL',
+  },
+  {
+    userId: 2,
+    cryptoCurrencyId: 1,
+    status: 'SUCCESS',
+    amount: '0.1',
+    price: '44000',
+    type: 'BUY',
+  },
+  {
+    userId: 2,
+    cryptoCurrencyId: 1,
+    status: 'FAILED',
+    amount: '50',
+    price: '1.05',
+    type: 'SELL',
+  },
+];
+
+const transactionData = [
+  {
+    userId: 1,
+    cryptoCurrencyId: 1,
+    orderId: 1, // First order (BUY, SUCCESS)
+    status: "SUCCESS",
+    fee: "5.00",
+    paymentMethod: "WALLET",
+    type: "BUY",
+  },
+  {
+    userId: 1,
+    cryptoCurrencyId: 1,
+    orderId: 2, // Second order (BUY, SUCCESS)
+    status: "SUCCESS",
+    fee: "3.50",
+    paymentMethod: "WALLET",
+    type: "BUY",
+  },
+  {
+    userId: 1, 
+    cryptoCurrencyId: 1,
+    orderId: 3, // Third order (SELL, PENDING)
+    status: "PENDING",
+    fee: "4.25",
+    paymentMethod: "WALLET",
+    type: "SELL",
+  },
+  {
+    userId: 2,
+    cryptoCurrencyId: 1,
+    orderId: 4, // Fourth order (BUY, SUCCESS)
+    status: "SUCCESS",
+    fee: "7.50",
+    paymentMethod: "BANK",
+    type: "BUY",
+  },
+  {
+    userId: 2,
+    cryptoCurrencyId: 1,
+    orderId: 5, // Fifth order (SELL, FAILED)
+    status: "FAILED",
+    fee: "6.00",
+    paymentMethod: "WALLET",
+    type: "SELL",
+  }
+];
+
 const run = async () => {
   try {
     const user = await prisma.user.createMany({
@@ -72,6 +164,16 @@ const run = async () => {
       skipDuplicates: true,
     });
     console.log(`✅ Created ${wallet.count} wallets`);
+    const order = await prisma.order.createMany({
+      data: orderData,
+      skipDuplicates: true,
+    });
+    console.log(`✅ Created ${order.count} orders`);
+    const transaction = await prisma.transaction.createMany({
+      data: transactionData,
+      skipDuplicates: true,
+    });
+    console.log(`✅ Created ${order.count} transactions`);
   } catch (error) {
     console.error("Error:", error);
   }
