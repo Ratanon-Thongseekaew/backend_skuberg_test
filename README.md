@@ -2,9 +2,9 @@
 
 ## Description 
 Code ใน github คือ Backend ที่ถูกสร้างขึ้นตาม ER-Diagram: https://drive.google.com/file/d/1OEy05qbdneOOCTF7jDQPa_t9h88ffuAk/view?usp=sharing
-## Techstack 
-Node.js, express.Js, bcryptjs, cors ,jsonwebtoken, dotenv, morgan, nodemon, prisma , zod
-
+## Techstack & Database
+Techstack: Node.js, express.Js, bcryptjs, cors ,jsonwebtoken, dotenv, morgan, nodemon, prisma , zod
+database: MySQL
 ## Services
 | Path | Method | Authen | params | query | body |  
 |:--|:--|:--|:--|:--  |:--
